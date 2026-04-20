@@ -1,8 +1,6 @@
 # ZoraCLI Skills
 
-> OpenClaw agent skills for trading on Zora — the attention market on Base chain.
-
-Built by [@zak_krevitt](https://zora.co/@zak)
+> Claude Code / OpenClaw agent skills for advanced systems in the Zora CLI. 
 
 ---
 
