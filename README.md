@@ -1,6 +1,6 @@
-# Zora Skills
+# ZoraCLI Skills
 
-OpenClaw agent skills for trading on Zora — the attention market on Base.
+> OpenClaw agent skills for trading on Zora — the attention market on Base chain.
 
 Built by [@zak_krevitt](https://zora.co/@zak)
 
@@ -8,49 +8,74 @@ Built by [@zak_krevitt](https://zora.co/@zak)
 
 ## Skills
 
-| Skill | Description |
-|-------|-------------|
-| [zora-scan](./zora-scan/SKILL.md) | Instant token signal card — drop any Base CA, get market data |
-| [zora-lore](./zora-lore/SKILL.md) | Deep token research: market + creator + social signals |
-| [zora-dca](./zora-dca/SKILL.md) | Recurring buys into leaderboard or custom coins + Growth Mode |
-| [zora-limit-orders](./zora-limit-orders/SKILL.md) | Automated take-profit tiers and stop-loss execution |
-| [zora-portfolio](./zora-portfolio/SKILL.md) | Live P&L, position management, buy/sell from one panel |
-| [zora-follow](./zora-follow/SKILL.md) | Watch wallets — alerts on creates/buys/sells, optional copy-trade |
+| Skill | Description | Install |
+|-------|-------------|---------|
+| **zora-scan** | Instant token signal — drop any Base CA, get market data | [Download](./dist/zora-scan.skill) |
+| **zora-lore** | Deep token research: market + creator + social signals | [Download](./dist/zora-lore.skill) |
+| **zora-dca** | Recurring buys into leaderboard or custom coins + Growth Mode | [Download](./dist/zora-dca.skill) |
+| **zora-limit-orders** | Automated take-profit tiers and stop-loss execution | [Download](./dist/zora-limit-orders.skill) |
+| **zora-portfolio** | Live P&L, position management, buy/sell from one panel | [Download](./dist/zora-portfolio.skill) |
+| **zora-follow** | Watch wallets — alerts on creates/buys/sells, copy-trade | [Download](./dist/zora-follow.skill) |
 
 ---
 
 ## Requirements
 
-- [OpenClaw](https://openclaw.ai) agent
-- [Zora CLI](https://cli.zora.com) (`npm install -g @zoralabs/cli --prefix ~/.local`)
+- [OpenClaw](https://openclaw.ai) — AI agent platform
+- [Zora CLI](https://cli.zora.com) — command-line trading interface
 - Node.js 20+
-- A funded Base wallet (ETH on Base chain)
-
----
-
-## Installation
-
-1. Download a `.skill` file from [ClaWHub](https://clawhub.ai)
-2. Install via OpenClaw: `/skill install zora-scan.skill`
-3. Or clone this repo and use locally
+- ETH on Base chain (fund your wallet after setup)
 
 ---
 
 ## Quick Start
 
 ```bash
-# Install Zora CLI
-npm install -g @zoralabs/cli --prefix ~/.local
-export PATH="$HOME/.local/bin:$PATH"
+# 1. Install Zora CLI
+npm install -g @zoralabs/cli
 
-# Create a wallet
+# 2. Create a trading wallet
 zora setup --create
+# → saves wallet to ~/.config/zora/wallet.json
 
-# Fund your wallet (send ETH on Base to the displayed address)
+# 3. Fund your wallet
+# Send ETH on Base to the address shown above
 
-# Start scanning
-# In your OpenClaw chat: paste any Base contract address
+# 4. Verify
+zora balance --json
 ```
+
+---
+
+## Installing a Skill
+
+**Option A: Download and install**
+1. Download a `.skill` file from the `dist/` folder above
+2. In OpenClaw: `/skill install path/to/zora-scan.skill`
+
+**Option B: Install from URL**
+```
+/skill install https://raw.githubusercontent.com/zak802/ZoraCLI_skills/main/dist/zora-scan.skill
+```
+
+---
+
+## Slash Commands
+
+| Skill | Command |
+|-------|---------|
+| zora-scan | `/scan <0x...>` or just paste a contract address |
+| zora-lore | `/lore <0x... or @handle>` |
+| zora-dca | `/dca setup` · `/dca add <address> <eth>` · `/dca growth` |
+| zora-limit-orders | `/orders set-tp <address> <pct> <sell%>` · `/orders set-sl` |
+| zora-portfolio | `/portfolio` · `/portfolio <address>` |
+| zora-follow | `/follow add <address>` · `/follow copy <address> <eth>` |
+
+---
+
+## About
+
+These skills were built while developing a Zora trading bot and extracted into reusable agent skills. They work together — scan a token, lore it, DCA in, set limit orders, track in portfolio, follow the creator.
 
 ---
 
