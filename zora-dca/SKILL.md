@@ -168,6 +168,27 @@ Store in `positions.json`:
 - Recommend starting with 0.001 ETH/coin to observe before scaling
 - Separate DCA wallet from main wallet to track performance cleanly
 
+## Token Selection
+
+The Zora CLI supports buying with ETH, USDC, or $ZORA:
+
+```bash
+zora buy <address> --eth 0.005 --token eth    # default
+zora buy <address> --eth 0.005 --token zora   # spend $ZORA
+zora buy <address> --usd 10    --token usdc   # spend USDC
+```
+
+**Smart selection:** check wallet balances and use whichever token has the highest USD value:
+
+```js
+function getBestToken(walletBalance) {
+  const eth  = walletBalance.find(t => t.symbol === 'ETH');
+  const zora = walletBalance.find(t => t.symbol === 'ZORA');
+  if (zora && parseFloat(zora.usdValue) > parseFloat(eth?.usdValue || 0)) return 'zora';
+  return 'eth';
+}
+```
+
 ## Related Skills
 
 - `zora-limit-orders` — configure TP/SL on DCA positions

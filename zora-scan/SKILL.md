@@ -120,6 +120,27 @@ Offer quick actions:
 - Add to DCA schedule (see zora-dca skill)
 - Deep research (see zora-lore skill)
 
+## Token Selection
+
+The Zora CLI supports buying with ETH, USDC, or $ZORA:
+
+```bash
+zora buy <address> --eth 0.005 --token eth    # default
+zora buy <address> --eth 0.005 --token zora   # spend $ZORA
+zora buy <address> --usd 10    --token usdc   # spend USDC
+```
+
+**Smart selection:** check wallet balances and use whichever token has the highest USD value:
+
+```js
+function getBestToken(walletBalance) {
+  const eth  = walletBalance.find(t => t.symbol === 'ETH');
+  const zora = walletBalance.find(t => t.symbol === 'ZORA');
+  if (zora && parseFloat(zora.usdValue) > parseFloat(eth?.usdValue || 0)) return 'zora';
+  return 'eth';
+}
+```
+
 ## Error Handling
 
 - No pairs found → "No trading data found on Base for this address"
